@@ -1,0 +1,38 @@
+<div class="col-8 mx-auto">
+  <div id="response_partial_id">
+    <%= render "response", response: @response %>
+  </div>
+
+  <div class="" style="background: #b1b1b1;">
+    <%= render "form", url: openai_handle_prompt1_path, form_id: 'form_2' %>
+  </div>
+</div>
+
+<% content_for :javascript do %>
+  <script>
+    //******************
+    //* Send prompt
+    //*
+    function send_prompt(event) {
+        event.preventDefault();
+        const csrfToken = $("meta[name='csrf-token']").attr('content');
+        var form = $("#form_2")
+
+        $.ajax({
+          url: $("#form_2").attr('action'),
+          type: "POST",
+          data: {
+            authenticity_token: form[0].authenticity_token.value,
+            openai: {
+              prompt: form[0].openai_prompt.value
+            }
+          },
+          dataType: "script",
+          success: function(data) {},
+          error: function(err) {
+            console.log('err', err);
+          }
+        })
+    }
+  </script>
+<% end %>

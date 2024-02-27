@@ -1,0 +1,8 @@
+<%= form_for :openai, url: url, data: { type: :json }, html: { id: form_id, remote: true } do |f| %>
+  <div class="py-3 d-flex w-100 justify-space-between">
+      <%= f.text_area :prompt, class: "mx-3 w-100", rows: 10, cols: 40, placeholder: 'Insert Prompt' %>
+      <button class="mx-2" onclick="send_prompt(event)">
+          Enviar
+      </button>
+  </div>
+<% end %>
